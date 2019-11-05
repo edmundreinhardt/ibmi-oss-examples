@@ -16,6 +16,7 @@ def query_ibm_db():
 
     statement = request.form.get('sql')
     # use CWBLOGON on Windows or .odbc.ini to avoid passing in password
+    # on Windows the CWBLOGON is lost on reboot, and will have to be run again
     conn = pyodbc.connect('DSN=LUGDEMO') 
     cur = conn.cursor()
     cur.execute(statement)
@@ -30,6 +31,8 @@ def cmd_toolkit():
     cl_statement = request.form.get('cl')
     # xmlservice
     itool = iToolKit()
+    # use CWBLOGON on Windows or .odbc.ini to avoid passing in password
+    # on Windows the CWBLOGON is lost on reboot, and will have to be run again
     conn = pyodbc.connect('DSN=LUGDEMO')
     itransport = DatabaseTransport(conn)
     itool.add(iCmd5250(cl_statement, cl_statement))
