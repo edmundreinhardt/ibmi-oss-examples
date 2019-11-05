@@ -15,7 +15,8 @@ def sample():
 def query_ibm_db():
 
     statement = request.form.get('sql')
-    conn = pyodbc.connect('DSN=LUGDEMO')
+    # use CWBLOGON on Windows or .odbc.ini to avoid passing in password
+    conn = pyodbc.connect('DSN=LUGDEMO') 
     cur = conn.cursor()
     cur.execute(statement)
     
